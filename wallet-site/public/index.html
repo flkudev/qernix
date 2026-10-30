@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Wallet · Overview</title><link rel="stylesheet" href="/style.css"><link rel="stylesheet" href="/logout.css"><script src="/app.js" defer></script></head>
+<body>
+  <main id="overview" class="dashboard">
+    <header class="topbar">
+      <a class="brand" href="#overview" aria-label="Wallet overview"><span class="brand-mark">q</span><span>Wallet<span class="brand-dot">.</span></span></a>
+      <div class="profile"><span class="avatar" id="profile-initial">g</span><span id="user-label"><span id="user-name">guest</span><span id="user-role" class="dim">[Guest]</span></span></div>
+    </header>
+    <section class="hero">
+      <div><h1>Overview</h1>
+        <div id="account-line"><button type="button" id="login-open" class="save">Sign in <span aria-hidden="true">↗</span></button><button type="button" id="logout-open" hidden>Sign out</button><button type="button" id="ticket-open">Get support</button></div>
+      </div>
+    </section>
+    <div class="section-heading"><h2>Balances</h2><span class="live-badge"><span id="live-indicator">○</span> <span id="connection-label">Connecting</span></span></div>
+    <section class="balances" aria-label="Live token balances">
+      <article class="balance-card"><div class="card-title"><span class="coin-icon">₿</span><h3>Bitcoin</h3></div><div class="amount"><span id="btc-balance">—</span><span class="unit">HBTC</span></div></article>
+      <article class="balance-card"><div class="card-title"><span class="coin-icon eth-icon" aria-hidden="true"><svg width="20" height="28" viewBox="0 0 20 32" fill="currentColor"><path d="M10 0 0 17l10 6 10-6L10 0Zm0 25L0 19l10 13 10-13-10 6Z"/></svg></span><h3>Ethereum</h3></div><div class="amount"><span id="eth-balance">—</span><span class="unit">ETH</span></div></article>
+    </section>
+    <p id="session-message" class="red" role="status" hidden></p>
+    <section class="tools-panel" aria-label="Quick actions"><div class="quick-actions"><button type="button" data-command="status">Status</button><button type="button" data-command="help">Help</button><button type="button" data-command="tickets" data-owner hidden>Inbox</button><button type="button" data-command="export" data-owner hidden>Export</button></div></section>
+    <details id="actions-panel" class="actions-panel"><summary>More actions <span>+</span></summary><div id="command-output" role="log" aria-live="polite"></div><form id="command-form" autocomplete="off"><label for="command-input" class="sr-only">Action</label><input id="command-input" aria-label="Action" placeholder="Enter an action, or type help" spellcheck="false" autocomplete="off"><button type="submit">Run <span aria-hidden="true">→</span></button></form></details>
+  </main>
+  <dialog id="editor" aria-labelledby="editor-title"><form id="balance-form"><div class="modal-top"><span class="purple">Balance settings</span><button type="button" id="close-editor" aria-label="Close balance editor">×</button></div><h2 id="editor-title">Edit balances</h2><label for="btc-input">HBTC</label><input id="btc-input" name="btc" type="number" min="0" max="1000000000000" step="0.00000001" required><label for="eth-input">ETH</label><input id="eth-input" name="eth" type="number" min="0" max="1000000000000" step="0.00000001" required><p id="form-error" role="alert"></p><div class="modal-actions"><button type="button" id="restore-defaults">reset 5 / 5</button><button type="submit" class="save">Save changes</button></div></form></dialog>
+  <dialog id="login-dialog" aria-labelledby="login-title"><form id="login-form"><div class="modal-top"><span class="purple">Your account</span><button type="button" id="login-cancel" aria-label="Close login">×</button></div><h2 id="login-title">Welcome back</h2><label for="login-user">username</label><input id="login-user" name="username" autocomplete="username" required><label for="login-pass">password</label><input id="login-pass" name="password" type="password" autocomplete="current-password" required><p id="login-error" role="alert"></p><div class="modal-actions"><button type="button" id="login-as-guest">stay guest</button><button type="submit" class="save">Sign in</button></div></form></dialog>
+  <dialog id="ticket-dialog" aria-labelledby="ticket-title"><form id="ticket-form"><div class="modal-top"><span class="purple">Support</span><button type="button" class="close-ticket" aria-label="Close help ticket">×</button></div><h2 id="ticket-title">How can we help?</h2><p class="dim">Send a message to the owners. It lands in their local inbox.</p><label for="ticket-message">message</label><textarea id="ticket-message" maxlength="1000" required></textarea><p id="ticket-status" role="status"></p><div class="modal-actions"><button type="button" class="close-ticket">cancel</button><button type="submit" class="save">Send message</button></div></form></dialog>
+  <dialog id="welcome-dialog" aria-labelledby="welcome-title"><div class="modal-top"><span class="purple">Welcome</span><button type="button" id="welcome-close" aria-label="Close welcome">×</button></div><p class="welcome-kicker">WELCOME</p><h2 id="welcome-title">Make yourself at home.</h2><p class="welcome-copy">Check all the money Qernix has right now, and send help tickets straight to the owners.</p><ul class="welcome-points"><li>Live HBTC and ETH balances.</li><li>Help tickets land in the owners' inbox.</li></ul><div class="welcome-actions"><button type="button" id="welcome-balances" class="save">View balances</button><button type="button" id="welcome-ticket">send a ticket</button></div><p class="welcome-foot"><span class="dim">Owner?</span> <button type="button" id="welcome-login" class="link-button">login here</button></p></dialog>
+  <div id="toast" role="status">✓ balances updated</div>
+  <section id="logout-screen" aria-labelledby="logout-title" hidden>
+    <div class="logout-copy">
+      <p class="logout-code">EMERGENCY LOCKDOWN</p>
+      <div class="panic-sigil" aria-hidden="true">!</div>
+      <h1 id="logout-title" tabindex="-1">You're locked out.</h1>
+      <p class="logout-taunt">Qernix has been locked down because of a detected hijacker in our system.</p>
+      <div class="panic-readout"><p>If you attempted to hijack our server containing valuable cryptocurrency assets, just so you know this is a serious criminal offense that could result in several years in prison. Your information and activity logs will be forwarded to local law enforcement authorities.</p><p>Your ip has been logged for security purposes.</p><p class="panic-ended">All transactions are suspended.<br>Session terminated</p></div>
+      <span class="logout-cursor" aria-hidden="true">▌</span>
+    </div>
+  </section>
+</body>
+</html>
