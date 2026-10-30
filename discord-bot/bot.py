@@ -23,7 +23,7 @@ load_dotenv(Path(__file__).with_name(".env"))
 DATA_FILE = Path(os.getenv("LEDGER_FILE", Path(os.getenv("APPDATA", ".")) / "ExodusCopy" / "discord-ledger.json"))
 PREF_FILE = Path(os.getenv("APPDATA", ".")) / "ExodusCopy" / "pref.json"
 COINS = {"btc": "BTC", "eth": "ETH"}
-WALLET_API = os.getenv("WALLET_API", "http://127.0.0.1:3000")
+WALLET_API = os.getenv("WALLET_API", "https://qernix-alpha.vercel.app").rstrip("/")
 PANIC_CHANNEL_ID = 1563981574796476516
 BOT_LOCK_FILE = Path(os.getenv("APPDATA", ".")) / "ExodusCopy" / "discord-bot.lock"
 
@@ -55,7 +55,7 @@ def wallet_request(endpoint, payload=None):
     except HTTPError as error:
         raise ValueError(json.load(error).get("error", "Wallet request failed.")) from error
     except (URLError, TimeoutError) as error:
-        raise ValueError("Start the wallet website with npm start, then try again.") from error
+        raise ValueError("The Qernix wallet API is unreachable. Check WALLET_API and that the deployed site is online.") from error
 
 
 def load_ledger():
