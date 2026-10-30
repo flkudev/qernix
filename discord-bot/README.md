@@ -18,6 +18,6 @@ py bot.py
 
 Commands:
 
-- `/send coin amount wallet` — deducts from the localhost website balance. BTC maps to the website's HBTC card. Use `exodus` as the wallet to update this PC's Exodus visual, or paste its matching BTC/ETH receive address. Increase balances using **U** on the website; no claim command is needed.
+- `/send coin amount wallet` — deducts from the simulated Qernix wallet balance. BTC maps to the website's HBTC card. Use `exodus` as the wallet label for the fake Exodus visual, or paste a label/address. This never sends real cryptocurrency.
 
-Run `npm start` in `wallet-site` before starting this bot. The bot and app must run on the same Windows account and PC. The shared ledger is saved to `%APPDATA%\ExodusCopy\discord-ledger.json`. Try `/send btc 2 exodus`; the website's default 5 becomes 3, Discord replies, and the Exodus credit is scheduled 10 seconds later with the same transaction ID. Restart the bot after code changes. Keep your bot token private and do not commit it.
+By default, the bot calls the deployed API at `https://qernix-alpha.vercel.app`. Override it in `.env` with `WALLET_API=https://your-domain.example`. The current deployment still needs its Supabase-backed API before global balance changes will persist. Keep `DISCORD_TOKEN` and `WALLET_API_KEY` private and do not commit them.
