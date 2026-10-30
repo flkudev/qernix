@@ -1,0 +1,85 @@
+body.logged-out { background: #000; overflow: hidden; }
+body.logged-out #toast { display: none; }
+#logout-screen[hidden] { display: none; }
+#logout-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  background: radial-gradient(ellipse at center, #1c1c1c 0%, #080808 45%, #000 75%);
+  text-align: center;
+}
+.logout-copy { width: 100%; animation: logout-arrive 600ms ease-out both; }
+#logout-screen::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, transparent 0 3px, #0008 3px 4px); }
+.logout-copy { position: relative; }
+.panic-readout { margin: 28px auto 12px; font-size: clamp(10px, 1.7vw, 13px); letter-spacing: .14em; color: #d0d0d0; }
+.panic-readout p { margin: 12px 0; }
+.prank-label { display: block; color: #8a8a8a; font-size: 10px; letter-spacing: .1em; margin-top: 6px; }
+.panic-ended { color: #767676; }
+.panic-sigil { font: 64px/1 monospace; color: #dedede; margin: 0 auto 22px; text-shadow: 0 0 32px #ffffff44; animation: containment 4s ease-in-out infinite; }
+#logout-screen::after { content: ''; position: absolute; inset: 16px; border: 1px solid #454545; pointer-events: none; box-shadow: inset 0 0 80px #ffffff10; }
+@keyframes containment { 0%, 100% { opacity: .45; transform: scale(.96); } 50% { opacity: 1; transform: scale(1.04); } }
+.logout-code {
+  margin: 0 0 28px;
+  color: #8f8f8f;
+  font-size: 10px;
+  letter-spacing: .38em;
+}
+#logout-title {
+  position: relative;
+  display: inline-block;
+  margin: 0;
+  color: #f4f4f4;
+  font: 900 clamp(36px, 8vw, 110px)/1.1 "Cascadia Mono", Consolas, monospace;
+  letter-spacing: .12em;
+  text-shadow: 0 0 40px #ffffff30;
+  outline: none;
+}
+#logout-title::after {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: #cfcfcf;
+  opacity: 0;
+  clip-path: inset(42% 0 35%);
+  animation: logout-glitch 4.5s infinite;
+}
+.logout-taunt {
+  margin: 26px 0 14px;
+  color: #9c9c9c;
+  font-size: clamp(11px, 2vw, 14px);
+  letter-spacing: .08em;
+}
+.logout-cursor { color: #e6e6e6; animation: logout-cursor 1.6s steps(1) infinite; }
+.sound-hint { margin: 20px 0 0; color: #a8a8a8; font-size: 10px; letter-spacing: .22em; animation: sound-hint 2.4s ease-in-out infinite; }
+@keyframes sound-hint { 0%, 100% { opacity: .35; } 50% { opacity: 1; } }
+@keyframes logout-arrive { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes logout-glitch {
+  0%, 91%, 95%, 100% { opacity: 0; transform: none; }
+  92% { opacity: .75; transform: translateX(-5px); }
+  94% { opacity: .45; transform: translateX(4px); }
+}
+@keyframes logout-cursor { 0%, 49% { opacity: 1; } 50%, 100% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) {
+  .logout-copy, #logout-title::after, .logout-cursor, .panic-sigil, .sound-hint { animation: none; }
+}
+
+/* Quiet, cinematic lockdown treatment. */
+body.logged-out .desktop-label, body.logged-out .desktop-footer { display: none; }
+#logout-screen { background: #050506; color: #eeece9; font-family: 'Segoe UI', Arial, sans-serif; overflow: auto; }
+#logout-screen::before { background: radial-gradient(ellipse at 50% 35%, #49231e35, transparent 55%); animation: shadow-breath 12s ease-in-out infinite alternate; }
+#logout-screen::after { content: 'QERNIX'; inset: 30px auto auto 32px; border: 0; box-shadow: none; font-size: 12px; letter-spacing: .22em; color: #a49c97; }
+.logout-copy { width: min(100%, 760px); padding: 70px 0; animation: cinematic-arrive 1.8s ease-out both; }
+.logout-code { margin-bottom: 42px; font-size: 10px; letter-spacing: .24em; color: #a18880; }
+.panic-sigil { width: 76px; height: 76px; display: grid; place-items: center; margin-bottom: 38px; border: 1px solid #94736835; border-radius: 50%; box-shadow: 0 0 0 12px #94736806, 0 0 70px #85332118; color: #ba8171; font: 200 25px 'Segoe UI', sans-serif; text-shadow: none; animation: shadow-breath 7s ease-in-out infinite alternate; }
+#logout-title { color: #eeece9; font: 300 clamp(48px, 10vw, 108px)/1.05 'Segoe UI', Arial, sans-serif; letter-spacing: -.065em; text-shadow: none; }
+#logout-title::after, .logout-cursor { display: none; }
+.logout-taunt { max-width: 440px; margin: 28px auto 0; color: #a29b96; font-size: 15px; line-height: 1.8; letter-spacing: 0; }
+.panic-readout { max-width: 380px; margin: 42px auto 0; padding-top: 24px; border-top: 1px solid #ffffff12; color: #746e69; font-size: 12px; line-height: 1.8; letter-spacing: 0; }
+.panic-ended { color: #aa8174; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; }
+.sound-hint { margin-top: 30px; color: #a29b96; font-size: 11px; letter-spacing: 0; animation: none; }
+@keyframes shadow-breath { from { opacity: .4; } to { opacity: 1; } }
+@keyframes cinematic-arrive { from { opacity: 0; transform: translateY(12px); filter: blur(7px); } to { opacity: 1; transform: none; filter: blur(0); } }
+@media (prefers-reduced-motion: reduce) { .logout-copy, .panic-sigil, #logout-screen::before { animation: none; } }
